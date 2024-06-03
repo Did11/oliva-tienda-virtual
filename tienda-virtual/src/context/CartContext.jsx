@@ -1,14 +1,10 @@
-// src/context/CartContext.jsx
-
 import React, { createContext, useState, useEffect, useContext } from 'react';
 
-export const CartContext = createContext();
+const CartContext = createContext();
 
-export const useCart = () => {
-    return useContext(CartContext);
-};
+export const useCart = () => useContext(CartContext);
 
-const CartProvider = ({ children }) => {
+export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState(() => {
         const savedCart = localStorage.getItem('cart');
         return savedCart ? JSON.parse(savedCart) : [];
@@ -54,4 +50,5 @@ const CartProvider = ({ children }) => {
     );
 };
 
+export { CartContext };
 export default CartProvider;

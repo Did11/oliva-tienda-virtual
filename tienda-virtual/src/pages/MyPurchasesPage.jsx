@@ -1,5 +1,3 @@
-// src/pages/MyPurchasesPage.jsx
-
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 
@@ -30,7 +28,9 @@ const MyPurchasesPage = () => {
                             <h3>Productos:</h3>
                             <ul>
                                 {order.products.map((product) => (
-                                    <li key={product.id}>{product.title} - ${product.price}</li>
+                                    <li key={product.id}>
+                                        {product.title} - ${product.price} x {product.quantity}
+                                    </li>
                                 ))}
                             </ul>
                         </li>

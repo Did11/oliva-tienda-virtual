@@ -1,6 +1,8 @@
-import React, { useContext, useState } from 'react';
+// src/pages/CheckoutPage.jsx
+
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CartContext } from '../context/CartContext';
+import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 
 const countries = [
@@ -26,7 +28,7 @@ const provinces = {
 };
 
 const CheckoutPage = () => {
-    const { cart, clearCart } = useContext(CartContext);
+    const { cart, clearCart } = useCart();
     const { user } = useAuth();
     const [shippingInfo, setShippingInfo] = useState({
         country: '',
@@ -59,22 +61,48 @@ const CheckoutPage = () => {
         }));
     };
 
+    const calculateSubtotal = () => {
+        return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+    };
+
+    const calculateShippingCost = (subtotal) => {
+        if (subtotal < 50) return subtotal * 0.30;
+        if (subtotal >= 50 && subtotal < 100) return subtotal * 0.25;
+        if (subtotal >= 100 && subtotal < 200) return subtotal * 0.20;
+        if (subtotal >= 200 && subtotal < 300) return subtotal * 0.15;
+        if (subtotal >= 300 && subtotal < 400) return subtotal * 0.10;
+        if (subtotal >= 400 && subtotal < 600) return subtotal * 0.10;
+        if (subtotal >= 600 && subtotal < 1000) return subtotal * 0.05;
+        return subtotal * 0.025;
+    };
+
     const handleCheckout = () => {
+        const subtotal = calculateSubtotal();
+        const shippingCost = calculateShippingCost(subtotal);
+        const total = subtotal + shippingCost;
+
         const orderData = {
             user: user.username,
             products: cart,
             shippingInfo,
+            subtotal: subtotal.toFixed(2),
+            shippingCost: shippingCost.toFixed(2),
+            total: total.toFixed(2),
             date: new Date().toISOString(),
         };
 
-        // Guarda la compra en localStorage
-        const existingOrders = JSON.parse(localStorage.getItem('orders')) || [];
-        existingOrders.push(orderData);
-        localStorage.setItem('orders', JSON.stringify(existingOrders));
-
+        // Save the order in localStorage
+        const orders = JSON.parse(localStorage.getItem('orders')) || [];
+        orders.push(orderData);
+        localStorage.setItem('orders', JSON.stringify(orders));
+        
         clearCart();
         navigate('/order-confirmation');
     };
+
+    const subtotal = calculateSubtotal();
+    const shippingCost = calculateShippingCost(subtotal);
+    const total = subtotal + shippingCost;
 
     return (
         <div>
@@ -86,9 +114,12 @@ const CheckoutPage = () => {
                     <h2>Productos en el carrito</h2>
                     <ul>
                         {cart.map((item) => (
-                            <li key={item.id}>{item.title} - ${item.price}</li>
+                            <li key={item.id}>{item.title} - ${item.price} x {item.quantity}</li>
                         ))}
                     </ul>
+                    <h3>Subtotal: ${subtotal.toFixed(2)}</h3>
+                    <h3>Costo de Envío: ${shippingCost.toFixed(2)}</h3>
+                    <h3>Total: ${total.toFixed(2)}</h3>
                     <h2>Información de Envío</h2>
                     <form>
                         <div>
