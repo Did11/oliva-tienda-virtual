@@ -23,21 +23,22 @@ const CartPage = () => {
       ) : (
         <div className="list-group">
           {cart.map((item) => (
-            <div key={item.id} className="list-group-item">
-              <div className="d-flex justify-content-between align-items-center">
-                <div>
+            <div key={item.id} className="list-group-item cart-item">
+              <div className="cart-item-info">
+                <img src={item.image} alt={item.title} className="cart-item-image" />
+                <div className="cart-item-details">
                   <h5>{item.title}</h5>
                   <p>${item.price.toFixed(2)}</p>
                 </div>
-                <div>
-                  <input
-                    type="number"
-                    value={item.quantity}
-                    onChange={(e) => handleQuantityChange(item.id, Number(e.target.value))}
-                    min="1"
-                  />
-                  <p>Total: ${(item.price * item.quantity).toFixed(2)}</p>
-                </div>
+              </div>
+              <div className="cart-item-actions">
+                <input
+                  type="number"
+                  value={item.quantity}
+                  onChange={(e) => handleQuantityChange(item.id, Number(e.target.value))}
+                  min="1"
+                />
+                <p>Total: ${(item.price * item.quantity).toFixed(2)}</p>
                 <button onClick={() => removeFromCart(item.id)} className="btn btn-danger">
                   Eliminar
                 </button>
