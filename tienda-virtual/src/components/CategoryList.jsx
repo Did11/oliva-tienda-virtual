@@ -1,6 +1,8 @@
+// src/components/CategoryList.jsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import '../App.css'; // Ajusta la ruta según tu estructura de carpetas
 
 const CategoryList = () => {
   const [categories, setCategories] = useState([]);
@@ -31,9 +33,9 @@ const CategoryList = () => {
   return (
     <div className="container mt-4">
       <h2 className="text-center">Categories</h2>
-      <div className="row">
+      <div className="row justify-content-center">
         {categories.map((category, index) => (
-          <div className="col-md-3 col-sm-6 mb-4" key={index}>
+          <div className="col-lg-3 col-md-4 col-sm-6 mb-4" key={index}>
             <div className="card">
               <img src={categoryImages[category]} className="card-img-top" alt={category} />
               <div className="card-body">

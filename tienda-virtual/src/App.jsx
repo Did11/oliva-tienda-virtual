@@ -6,17 +6,20 @@ import HomePage from './pages/HomePage.jsx';
 import CategoryPage from './pages/CategoryPage.jsx';
 import ProductPage from './pages/ProductPage.jsx';
 import CartPage from './pages/CartPage.jsx';
+import CartProvider from './context/CartContext.jsx'; // Importa el CartProvider
 
 const App = () => (
-  <Router>
-    <Header />
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/category/:name" element={<CategoryPage />} />
-      <Route path="/product/:id" element={<ProductPage />} />
-      <Route path="/cart" element={<CartPage />} />
-    </Routes>
-  </Router>
+  <CartProvider>
+    <Router>
+      <Header />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/category/:name" element={<CategoryPage />} />
+        <Route path="/product/:id" element={<ProductPage />} />
+        <Route path="/cart" element={<CartPage />} />
+      </Routes>
+    </Router>
+  </CartProvider>
 );
 
 export default App;
