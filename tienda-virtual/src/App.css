@@ -15,13 +15,19 @@
 
 .App-header {
   background-color: #282c34;
-  padding: 20px;
+  padding: 10px 20px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.header-logo {
+  color: #61dafb;
+  text-decoration: none;
+  font-size: 1.5rem;
+  margin-right: 20px;
 }
 
 .nav-list {
@@ -46,7 +52,12 @@
 }
 
 .search-container {
-  margin-top: 10px;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.search-form {
   display: flex;
   align-items: center;
 }
@@ -55,7 +66,22 @@
   padding: 5px;
   font-size: 16px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 4px 0 0 4px;
+  width: 300px;
+  height: 38px; /* Asegura la misma altura */
+  box-sizing: border-box; /* Incluye padding y border en el tamaño total */
+}
+
+.category-select {
+  padding: 5px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-left: none;
+  border-radius: 0 4px 4px 0;
+  background-color: white;
+  cursor: pointer;
+  height: 38px; /* Asegura la misma altura */
+  box-sizing: border-box; /* Incluye padding y border en el tamaño total */
 }
 
 .search-button {
@@ -67,6 +93,7 @@
   color: white;
   cursor: pointer;
   margin-left: 10px;
+  height: 38px; /* Asegura la misma altura */
 }
 
 .search-button:hover {
@@ -74,18 +101,18 @@
 }
 
 .card-img-top {
-  width: 100%; /* Ajusta la imagen al ancho del contenedor */
-  height: 500px; /* Fija una altura para las imágenes */
-  object-fit: cover; /* Recorta la imagen para que se ajuste al contenedor */
-  object-position: top; /* Recorta solo la parte inferior */
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  object-position: top;
 }
 
 .card {
-  width: 100%; /* Deja que la tarjeta ocupe el 100% del ancho de su contenedor */
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 10px; /* Añade un margen para espaciar las tarjetas */
+  margin: 10px;
 }
 
 .card-body {
@@ -93,22 +120,21 @@
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  text-align: center; /* Centra el texto */
+  text-align: center;
 }
 
 .row {
   display: flex;
-  flex-wrap: wrap; /* Permite que las tarjetas se ajusten y no se superpongan */
+  flex-wrap: wrap;
   justify-content: center;
 }
 
-/* Estilos para las imágenes en la página de detalles del producto */
 .img-product-detail {
-  width: 100%; /* Ajusta el ancho al 100% del contenedor */
-  max-width: 400px; /* Establece un ancho máximo para evitar imágenes demasiado grandes */
-  height: auto; /* Mantiene la relación de aspecto de la imagen */
-  display: block; /* Asegura que la imagen se comporte como un bloque */
-  margin: 0 auto; /* Centra la imagen horizontalmente */
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
 .quantity-control {
@@ -133,7 +159,6 @@
   margin-top: 10px;
 }
 
-/* Estilo adicional para botones */
 .btn-primary {
   background-color: #007bff;
   border-color: #007bff;

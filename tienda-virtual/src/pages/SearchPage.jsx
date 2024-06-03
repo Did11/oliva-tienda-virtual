@@ -1,37 +1,59 @@
 // src/pages/SearchPage.jsx
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import ProductCard from '../components/ProductCard.jsx';
 
 const SearchPage = () => {
-  const { searchTerm } = useParams();
+  const location = useLocation();
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    if (searchTerm) {
-      axios.get(`https://fakestoreapi.com/products`)
-        .then(response => {
-          const filteredProducts = response.data.filter(product =>
-            product.title.toLowerCase().includes(searchTerm.toLowerCase())
-          );
-          setProducts(filteredProducts);
-        })
-        .catch(error => {
-          console.error('Error fetching products:', error);
-        });
-    }
-  }, [searchTerm]);
+    const params = new URLSearchParams(location.search);
+    const searchTerm = params.get('searchTerm') || '';
+    const category = params.get('category') ? decodeURIComponent(params.get('category')) : '';
+
+    console.log("Search Term:", searchTerm);
+    console.log("Category:", category);
+
+    const fetchProducts = async () => {
+      let url = 'https://fakestoreapi.com/products';
+      if (category) {
+        url += `/category/${encodeURIComponent(category)}`;
+      }
+
+      console.log("Fetching URL:", url);
+
+      try {
+        const response = await axios.get(url);
+        console.log("API Response:", response.data);
+
+        const filteredProducts = response.data.filter(product =>
+          product.title.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        console.log("Filtered Products:", filteredProducts);
+        setProducts(filteredProducts);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    fetchProducts();
+  }, [location]);
 
   return (
     <div className="container mt-4">
-      <h2>Search Results for: {searchTerm}</h2>
+      <h2>Search Results</h2>
       <div className="row">
-        {products.map(product => (
-          <div key={product.id} className="col-md-4 mb-4">
-            <ProductCard product={product} />
-          </div>
-        ))}
+        {products.length > 0 ? (
+          products.map(product => (
+            <div key={product.id} className="col-md-4 mb-4">
+              <ProductCard product={product} />
+            </div>
+          ))
+        ) : (
+          <p>No products found</p>
+        )}
       </div>
     </div>
   );

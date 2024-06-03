@@ -7,7 +7,7 @@ import CategoryPage from './pages/CategoryPage.jsx';
 import ProductPage from './pages/ProductPage.jsx';
 import CartPage from './pages/CartPage.jsx';
 import SearchPage from './pages/SearchPage.jsx';
-import CartProvider from './context/CartContext.jsx';
+import CartProvider from './context/CartContext.jsx'; 
 
 const App = () => (
   <CartProvider>
@@ -18,7 +18,7 @@ const App = () => (
         <Route path="/category/:name" element={<CategoryPage />} />
         <Route path="/product/:id" element={<ProductPage />} />
         <Route path="/cart" element={<CartPage />} />
-        <Route path="/search/:searchTerm" element={<SearchPage />} />
+        <Route path="/search" element={<SearchPage />} /> {/* Asegúrate de que esta ruta esté definida */}
       </Routes>
     </Router>
   </CartProvider>
