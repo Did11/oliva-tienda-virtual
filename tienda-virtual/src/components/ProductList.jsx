@@ -1,6 +1,6 @@
 // src/components/ProductList.jsx
 import React from 'react';
-import { AddToCartButton, ViewDetailsButton } from './ProductButton.jsx';
+import { ViewDetailsButton } from './ProductButton.jsx';
 
 const ProductList = ({ products }) => {
   return (
@@ -15,7 +15,6 @@ const ProductList = ({ products }) => {
                 <p className="card-text">${product.price}</p>
                 <div className="d-flex justify-content-between">
                   <ViewDetailsButton productId={product.id} />
-                  <AddToCartButton product={product} />
                 </div>
               </div>
             </div>
