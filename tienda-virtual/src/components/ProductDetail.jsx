@@ -21,7 +21,10 @@ const ProductDetail = () => {
   }, [id]);
 
   const handleQuantityChange = (e) => {
-    setQuantity(Number(e.target.value));
+    const value = Number(e.target.value);
+    if (value > 0) {
+      setQuantity(value);
+    }
   };
 
   const incrementQuantity = () => {
@@ -51,6 +54,7 @@ const ProductDetail = () => {
               value={quantity}
               onChange={handleQuantityChange}
               className="quantity-input"
+              min="1"
             />
             <button onClick={incrementQuantity} className="btn btn-secondary">+</button>
           </div>

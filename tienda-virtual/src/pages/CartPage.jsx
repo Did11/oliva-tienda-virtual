@@ -3,10 +3,16 @@ import React, { useContext } from 'react';
 import { CartContext } from '../context/CartContext.jsx';
 
 const CartPage = () => {
-  const { cart, removeFromCart } = useContext(CartContext);
+  const { cart, updateQuantity, removeFromCart } = useContext(CartContext);
 
   const calculateTotal = () => {
     return cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
+  };
+
+  const handleQuantityChange = (productId, quantity) => {
+    if (quantity > 0) {
+      updateQuantity(productId, quantity);
+    }
   };
 
   return (
@@ -24,7 +30,12 @@ const CartPage = () => {
                   <p>${item.price.toFixed(2)}</p>
                 </div>
                 <div>
-                  <p>Quantity: {item.quantity}</p>
+                  <input
+                    type="number"
+                    value={item.quantity}
+                    onChange={(e) => handleQuantityChange(item.id, Number(e.target.value))}
+                    min="1"
+                  />
                   <p>Total: ${(item.price * item.quantity).toFixed(2)}</p>
                 </div>
                 <button onClick={() => removeFromCart(item.id)} className="btn btn-danger">
