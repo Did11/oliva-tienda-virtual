@@ -12,12 +12,21 @@ const CartProvider = ({ children }) => {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
-  const addToCart = (product) => {
-    setCart([...cart, product]);
+  const addToCart = (product, quantity = 1) => {
+    setCart((prevCart) => {
+      const existingProductIndex = prevCart.findIndex((item) => item.id === product.id);
+      if (existingProductIndex > -1) {
+        const updatedCart = [...prevCart];
+        updatedCart[existingProductIndex].quantity += quantity;
+        return updatedCart;
+      } else {
+        return [...prevCart, { ...product, quantity }];
+      }
+    });
   };
 
   const removeFromCart = (productId) => {
-    setCart(cart.filter((product) => product.id !== productId));
+    setCart((prevCart) => prevCart.filter((product) => product.id !== productId));
   };
 
   return (

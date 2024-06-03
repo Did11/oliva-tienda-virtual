@@ -2,12 +2,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import '../App.css'; // Asegúrate de ajustar la ruta
-import { AddToCartButton } from './ProductButton.jsx'; // Importa el botón de agregar al carrito
+import '../App.css';
+import { AddToCartButton } from './ProductButton.jsx';
 
 const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     axios.get(`https://fakestoreapi.com/products/${id}`)
@@ -19,6 +20,20 @@ const ProductDetail = () => {
       });
   }, [id]);
 
+  const handleQuantityChange = (e) => {
+    setQuantity(Number(e.target.value));
+  };
+
+  const incrementQuantity = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const decrementQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
+
   return (
     <div className="container mt-4">
       <h2 className="text-center">{product.title}</h2>
@@ -29,7 +44,17 @@ const ProductDetail = () => {
         <div className="col-md-6">
           <h3>{product.price}</h3>
           <p>{product.description}</p>
-          <AddToCartButton product={product} /> {/* Añade el botón de agregar al carrito */}
+          <div className="quantity-control">
+            <button onClick={decrementQuantity} className="btn btn-secondary">-</button>
+            <input
+              type="number"
+              value={quantity}
+              onChange={handleQuantityChange}
+              className="quantity-input"
+            />
+            <button onClick={incrementQuantity} className="btn btn-secondary">+</button>
+          </div>
+          <AddToCartButton product={product} quantity={quantity} /> {/* Pasa la cantidad al botón */}
         </div>
       </div>
     </div>

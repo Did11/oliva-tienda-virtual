@@ -3,12 +3,12 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { CartContext } from '../context/CartContext.jsx';
 
-export const AddToCartButton = ({ product }) => {
+export const AddToCartButton = ({ product, quantity }) => {
   const { addToCart } = useContext(CartContext);
 
   return (
-    <button onClick={() => addToCart(product)} className="btn btn-success">
-      Agregar una unidad
+    <button onClick={() => addToCart(product, quantity)} className="btn btn-success">
+      Agregar {quantity} {quantity > 1 ? 'unidades' : 'unidad'}
     </button>
   );
 };

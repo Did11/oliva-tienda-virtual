@@ -74,3 +74,16 @@
   display: block; /* Asegura que la imagen se comporte como un bloque */
   margin: 0 auto; /* Centra la imagen horizontalmente */
 }
+
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.quantity-input {
+  width: 60px;
+  text-align: center;
+  margin: 0 10px;
+}
