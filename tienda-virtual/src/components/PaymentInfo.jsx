@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const PaymentInfo = ({ shippingInfo, handleInputChange, onNext, onPrevious }) => {
+    const [errors, setErrors] = useState({});
+
     const handleExpirationDateChange = (e) => {
         let { value } = e.target;
         value = value.replace(/\D/g, ''); // Eliminar todo lo que no sea un dígito
@@ -14,7 +16,7 @@ const PaymentInfo = ({ shippingInfo, handleInputChange, onNext, onPrevious }) =>
 
     const validateExpirationDate = () => {
         const [month, year] = shippingInfo.expirationDate.split('/');
-        if (!month || !year) return false;
+        if (!month || !year || month > 12) return false;
 
         const expirationDate = new Date(`20${year}`, month - 1);
         const currentDate = new Date();
@@ -22,12 +24,27 @@ const PaymentInfo = ({ shippingInfo, handleInputChange, onNext, onPrevious }) =>
         return expirationDate >= currentDate;
     };
 
-    const handleNext = () => {
-        if (!validateExpirationDate()) {
-            alert('Se necesita una tarjeta con tiempo válido.');
-            return;
+    const validateForm = () => {
+        const newErrors = {};
+        if (!/^[0-9]{16}$/.test(shippingInfo.cardNumber)) {
+            newErrors.cardNumber = 'El número de tarjeta debe tener 16 dígitos.';
         }
-        onNext();
+        if (!/^[0-9]{3,4}$/.test(shippingInfo.securityCode)) {
+            newErrors.securityCode = 'El CVV debe tener 3 o 4 dígitos.';
+        }
+        if (!validateExpirationDate()) {
+            newErrors.expirationDate = 'La fecha de vencimiento debe ser válida y en el futuro. El mes debe ser entre 01 y 12.';
+        }
+        return newErrors;
+    };
+
+    const handleNext = () => {
+        const formErrors = validateForm();
+        if (Object.keys(formErrors).length === 0) {
+            onNext();
+        } else {
+            setErrors(formErrors);
+        }
     };
 
     return (
@@ -42,6 +59,7 @@ const PaymentInfo = ({ shippingInfo, handleInputChange, onNext, onPrevious }) =>
                         value={shippingInfo.cardNumber}
                         onChange={handleInputChange}
                     />
+                    {errors.cardNumber && <span>{errors.cardNumber}</span>}
                 </div>
                 <div className="form-group">
                     <label>Código de Seguridad:</label>
@@ -51,6 +69,7 @@ const PaymentInfo = ({ shippingInfo, handleInputChange, onNext, onPrevious }) =>
                         value={shippingInfo.securityCode}
                         onChange={handleInputChange}
                     />
+                    {errors.securityCode && <span>{errors.securityCode}</span>}
                 </div>
                 <div className="form-group">
                     <label>Fecha de Vencimiento (MM/AA):</label>
@@ -62,6 +81,7 @@ const PaymentInfo = ({ shippingInfo, handleInputChange, onNext, onPrevious }) =>
                         maxLength="5"
                         placeholder="MM/AA"
                     />
+                    {errors.expirationDate && <span>{errors.expirationDate}</span>}
                 </div>
                 <button type="button" onClick={handleNext} className="checkout-button">Continuar</button>
                 <button type="button" onClick={onPrevious} className="checkout-button">Volver</button>

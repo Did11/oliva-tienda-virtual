@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 
 const countries = [
@@ -25,6 +25,7 @@ const provinces = {
 
 const ShippingInfo = ({ shippingInfo, handleInputChange, handleCountryChange, onNext }) => {
     const { user } = useAuth();
+    const [errors, setErrors] = useState({});
 
     useEffect(() => {
         if (user && !shippingInfo.initialized) {
@@ -39,6 +40,27 @@ const ShippingInfo = ({ shippingInfo, handleInputChange, handleCountryChange, on
         }
     }, [user, handleInputChange, handleCountryChange, shippingInfo.initialized]);
 
+    const validateForm = () => {
+        const newErrors = {};
+        if (!shippingInfo.name) newErrors.name = 'El nombre es requerido.';
+        if (!shippingInfo.phone) newErrors.phone = 'El teléfono es requerido.';
+        if (!shippingInfo.country) newErrors.country = 'El país es requerido.';
+        if (!shippingInfo.province) newErrors.province = 'La provincia es requerida.';
+        if (!shippingInfo.city) newErrors.city = 'La ciudad es requerida.';
+        if (!shippingInfo.address) newErrors.address = 'La dirección es requerida.';
+        if (!shippingInfo.postalCode) newErrors.postalCode = 'El código postal es requerido.';
+        return newErrors;
+    };
+
+    const handleNext = () => {
+        const formErrors = validateForm();
+        if (Object.keys(formErrors).length === 0) {
+            onNext();
+        } else {
+            setErrors(formErrors);
+        }
+    };
+
     return (
         <div className="checkout-section">
             <h2>Información de Envío</h2>
@@ -51,6 +73,7 @@ const ShippingInfo = ({ shippingInfo, handleInputChange, handleCountryChange, on
                         value={shippingInfo.name}
                         onChange={handleInputChange}
                     />
+                    {errors.name && <span>{errors.name}</span>}
                 </div>
                 <div className="form-group">
                     <label>Teléfono:</label>
@@ -60,6 +83,7 @@ const ShippingInfo = ({ shippingInfo, handleInputChange, handleCountryChange, on
                         value={shippingInfo.phone}
                         onChange={handleInputChange}
                     />
+                    {errors.phone && <span>{errors.phone}</span>}
                 </div>
                 <div className="form-group">
                     <label>Country:</label>
@@ -75,6 +99,7 @@ const ShippingInfo = ({ shippingInfo, handleInputChange, handleCountryChange, on
                             </option>
                         ))}
                     </select>
+                    {errors.country && <span>{errors.country}</span>}
                 </div>
                 <div className="form-group">
                     <label>Province:</label>
@@ -91,6 +116,7 @@ const ShippingInfo = ({ shippingInfo, handleInputChange, handleCountryChange, on
                             </option>
                         ))}
                     </select>
+                    {errors.province && <span>{errors.province}</span>}
                 </div>
                 <div className="form-group">
                     <label>City:</label>
@@ -100,6 +126,7 @@ const ShippingInfo = ({ shippingInfo, handleInputChange, handleCountryChange, on
                         value={shippingInfo.city}
                         onChange={handleInputChange}
                     />
+                    {errors.city && <span>{errors.city}</span>}
                 </div>
                 <div className="form-group">
                     <label>Address:</label>
@@ -109,6 +136,7 @@ const ShippingInfo = ({ shippingInfo, handleInputChange, handleCountryChange, on
                         value={shippingInfo.address}
                         onChange={handleInputChange}
                     />
+                    {errors.address && <span>{errors.address}</span>}
                 </div>
                 <div className="form-group">
                     <label>Postal Code:</label>
@@ -118,8 +146,9 @@ const ShippingInfo = ({ shippingInfo, handleInputChange, handleCountryChange, on
                         value={shippingInfo.postalCode}
                         onChange={handleInputChange}
                     />
+                    {errors.postalCode && <span>{errors.postalCode}</span>}
                 </div>
-                <button type="button" onClick={onNext} className="checkout-button">Continuar</button>
+                <button type="button" onClick={handleNext} className="checkout-button">Continuar</button>
             </form>
         </div>
     );
