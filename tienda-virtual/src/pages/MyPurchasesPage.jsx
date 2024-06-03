@@ -1,37 +1,35 @@
 // src/pages/MyPurchasesPage.jsx
 
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 
 const MyPurchasesPage = () => {
     const { user } = useAuth();
-    const [purchases, setPurchases] = useState([]);
+    const [orders, setOrders] = useState([]);
 
     useEffect(() => {
-        const fetchPurchases = async () => {
-            const response = await axios.get('/api/orders');
-            const userPurchases = response.data.filter(order => order.user === user.username);
-            setPurchases(userPurchases);
+        const fetchOrders = () => {
+            const allOrders = JSON.parse(localStorage.getItem('orders')) || [];
+            const userOrders = allOrders.filter(order => order.user === user.username);
+            setOrders(userOrders);
         };
-
-        fetchPurchases();
+        fetchOrders();
     }, [user]);
 
     return (
         <div>
             <h1>Mis Compras</h1>
-            {purchases.length === 0 ? (
-                <p>No hay compras realizadas.</p>
+            {orders.length === 0 ? (
+                <p>No has realizado ninguna compra.</p>
             ) : (
                 <ul>
-                    {purchases.map((purchase, index) => (
+                    {orders.map((order, index) => (
                         <li key={index}>
-                            <h2>Compra realizada el {purchase.date}</h2>
-                            <p>Enviado a: {purchase.shippingInfo.address}, {purchase.shippingInfo.city}, {purchase.shippingInfo.province}, {purchase.shippingInfo.country}</p>
-                            <p>Productos:</p>
+                            <h2>Compra realizada el {new Date(order.date).toLocaleDateString()}</h2>
+                            <p>Envío a: {order.shippingInfo.address}, {order.shippingInfo.city}, {order.shippingInfo.province}, {order.shippingInfo.country}</p>
+                            <h3>Productos:</h3>
                             <ul>
-                                {purchase.products.map(product => (
+                                {order.products.map((product) => (
                                     <li key={product.id}>{product.title} - ${product.price}</li>
                                 ))}
                             </ul>

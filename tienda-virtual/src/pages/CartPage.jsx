@@ -1,9 +1,12 @@
 // src/pages/CartPage.jsx
+
 import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../context/CartContext.jsx';
 
 const CartPage = () => {
   const { cart, updateQuantity, removeFromCart } = useContext(CartContext);
+  const navigate = useNavigate();
 
   const calculateTotal = () => {
     return cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
@@ -13,6 +16,10 @@ const CartPage = () => {
     if (quantity > 0) {
       updateQuantity(productId, quantity);
     }
+  };
+
+  const handleCheckout = () => {
+    navigate('/checkout');
   };
 
   return (
@@ -47,6 +54,11 @@ const CartPage = () => {
           ))}
           <div className="list-group-item d-flex justify-content-end">
             <h4>Total: ${calculateTotal()}</h4>
+          </div>
+          <div className="list-group-item d-flex justify-content-end">
+            <button onClick={handleCheckout} className="btn btn-primary">
+              Realizar compra
+            </button>
           </div>
         </div>
       )}
