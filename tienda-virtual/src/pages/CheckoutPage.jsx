@@ -1,34 +1,15 @@
-// src/pages/CheckoutPage.jsx
-
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useCart } from '../context/CartContext';
+import { CartContext } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
-
-const countries = [
-    { code: 'US', name: 'United States' },
-    { code: 'CA', name: 'Canada' },
-    { code: 'MX', name: 'Mexico' },
-    // Agrega más países según sea necesario
-];
-
-const provinces = {
-    US: [
-        'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia',
-        // Agrega más estados según sea necesario
-    ],
-    CA: [
-        'Alberta', 'British Columbia', 'Manitoba', 'New Brunswick', 'Newfoundland and Labrador', 'Nova Scotia', 'Ontario', 'Prince Edward Island', 'Quebec', 'Saskatchewan',
-        // Agrega más provincias según sea necesario
-    ],
-    MX: [
-        'Aguascalientes', 'Baja California', 'Baja California Sur', 'Campeche', 'Chiapas', 'Chihuahua', 'Coahuila', 'Colima', 'Durango', 'Guanajuato', 'Guerrero', 'Hidalgo', 'Jalisco', 'Mexico City',
-        // Agrega más estados según sea necesario
-    ],
-};
+import ShippingInfo from '../components/ShippingInfo';
+import PersonalInfo from '../components/PersonalInfo';
+import PaymentInfo from '../components/PaymentInfo';
+import OrderConfirmation from '../components/OrderConfirmation';
+import './CheckoutPage.css';
 
 const CheckoutPage = () => {
-    const { cart, clearCart } = useCart();
+    const { cart, clearCart } = useContext(CartContext);
     const { user } = useAuth();
     const [shippingInfo, setShippingInfo] = useState({
         country: '',
@@ -40,7 +21,10 @@ const CheckoutPage = () => {
         phone: '',
         cardNumber: '',
         securityCode: '',
+        expirationDate: '',
+        initialized: false, // Añadir campo para controlar si la información del usuario ha sido precargada
     });
+    const [step, setStep] = useState(1);
 
     const navigate = useNavigate();
 
@@ -57,168 +41,88 @@ const CheckoutPage = () => {
         setShippingInfo((prevState) => ({
             ...prevState,
             [name]: value,
-            province: '', // Reset province when country changes
+            province: '',
         }));
     };
 
-    const calculateSubtotal = () => {
-        return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+    const handleNextStep = () => {
+        setStep(step + 1);
     };
 
-    const calculateShippingCost = (subtotal) => {
-        if (subtotal < 50) return subtotal * 0.30;
-        if (subtotal >= 50 && subtotal < 100) return subtotal * 0.25;
-        if (subtotal >= 100 && subtotal < 200) return subtotal * 0.20;
-        if (subtotal >= 200 && subtotal < 300) return subtotal * 0.15;
-        if (subtotal >= 300 && subtotal < 400) return subtotal * 0.10;
-        if (subtotal >= 400 && subtotal < 600) return subtotal * 0.10;
-        if (subtotal >= 600 && subtotal < 1000) return subtotal * 0.05;
-        return subtotal * 0.025;
+    const handlePreviousStep = () => {
+        setStep(step - 1);
     };
 
     const handleCheckout = () => {
-        const subtotal = calculateSubtotal();
-        const shippingCost = calculateShippingCost(subtotal);
-        const total = subtotal + shippingCost;
-
         const orderData = {
             user: user.username,
             products: cart,
             shippingInfo,
-            subtotal: subtotal.toFixed(2),
-            shippingCost: shippingCost.toFixed(2),
-            total: total.toFixed(2),
             date: new Date().toISOString(),
         };
 
-        // Save the order in localStorage
-        const orders = JSON.parse(localStorage.getItem('orders')) || [];
-        orders.push(orderData);
-        localStorage.setItem('orders', JSON.stringify(orders));
+        const existingOrders = JSON.parse(localStorage.getItem('orders')) || [];
+        existingOrders.push(orderData);
+        localStorage.setItem('orders', JSON.stringify(existingOrders));
         
         clearCart();
         navigate('/order-confirmation');
     };
 
-    const subtotal = calculateSubtotal();
-    const shippingCost = calculateShippingCost(subtotal);
-    const total = subtotal + shippingCost;
+    const calculateSubtotal = () => {
+        return cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
+    };
+
+    const calculateShippingCost = (subtotal) => {
+        if (subtotal < 50) return (subtotal * 0.20).toFixed(2);
+        if (subtotal < 200) return (subtotal * 0.18).toFixed(2);
+        if (subtotal < 300) return (subtotal * 0.16).toFixed(2);
+        if (subtotal < 500) return (subtotal * 0.14).toFixed(2);
+        if (subtotal < 600) return (subtotal * 0.1).toFixed(2);
+        if (subtotal < 800) return (subtotal * 0.05).toFixed(2);
+        return (subtotal * 0.03).toFixed(2);
+    };
+
+    const subtotal = parseFloat(calculateSubtotal());
+    const shippingCost = parseFloat(calculateShippingCost(subtotal));
+    const total = (subtotal + shippingCost).toFixed(2);
 
     return (
-        <div>
+        <div className="checkout-page">
             <h1>Checkout</h1>
-            {cart.length === 0 ? (
-                <p>No hay productos en el carrito.</p>
-            ) : (
-                <div>
-                    <h2>Productos en el carrito</h2>
-                    <ul>
-                        {cart.map((item) => (
-                            <li key={item.id}>{item.title} - ${item.price} x {item.quantity}</li>
-                        ))}
-                    </ul>
-                    <h3>Subtotal: ${subtotal.toFixed(2)}</h3>
-                    <h3>Costo de Envío: ${shippingCost.toFixed(2)}</h3>
-                    <h3>Total: ${total.toFixed(2)}</h3>
-                    <h2>Información de Envío</h2>
-                    <form>
-                        <div>
-                            <label>Country:</label>
-                            <select
-                                name="country"
-                                value={shippingInfo.country}
-                                onChange={handleCountryChange}
-                            >
-                                <option value="">Select Country</option>
-                                {countries.map((country) => (
-                                    <option key={country.code} value={country.code}>
-                                        {country.name}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-                        <div>
-                            <label>Province:</label>
-                            <select
-                                name="province"
-                                value={shippingInfo.province}
-                                onChange={handleInputChange}
-                                disabled={!shippingInfo.country}
-                            >
-                                <option value="">Select Province</option>
-                                {shippingInfo.country && provinces[shippingInfo.country].map((province) => (
-                                    <option key={province} value={province}>
-                                        {province}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-                        <div>
-                            <label>City:</label>
-                            <input
-                                type="text"
-                                name="city"
-                                value={shippingInfo.city}
-                                onChange={handleInputChange}
-                            />
-                        </div>
-                        <div>
-                            <label>Address:</label>
-                            <input
-                                type="text"
-                                name="address"
-                                value={shippingInfo.address}
-                                onChange={handleInputChange}
-                            />
-                        </div>
-                        <div>
-                            <label>Postal Code:</label>
-                            <input
-                                type="text"
-                                name="postalCode"
-                                value={shippingInfo.postalCode}
-                                onChange={handleInputChange}
-                            />
-                        </div>
-                        <div>
-                            <label>Name:</label>
-                            <input
-                                type="text"
-                                name="name"
-                                value={shippingInfo.name}
-                                onChange={handleInputChange}
-                            />
-                        </div>
-                        <div>
-                            <label>Phone:</label>
-                            <input
-                                type="text"
-                                name="phone"
-                                value={shippingInfo.phone}
-                                onChange={handleInputChange}
-                            />
-                        </div>
-                        <div>
-                            <label>Card Number:</label>
-                            <input
-                                type="text"
-                                name="cardNumber"
-                                value={shippingInfo.cardNumber}
-                                onChange={handleInputChange}
-                            />
-                        </div>
-                        <div>
-                            <label>Security Code:</label>
-                            <input
-                                type="text"
-                                name="securityCode"
-                                value={shippingInfo.securityCode}
-                                onChange={handleInputChange}
-                            />
-                        </div>
-                    </form>
-                    <button onClick={handleCheckout}>Comprar</button>
-                </div>
+            {step === 1 && (
+                <ShippingInfo 
+                    shippingInfo={shippingInfo} 
+                    handleInputChange={handleInputChange}
+                    handleCountryChange={handleCountryChange}
+                    onNext={handleNextStep} 
+                />
+            )}
+            {step === 2 && (
+                <PersonalInfo 
+                    shippingInfo={shippingInfo} 
+                    handleInputChange={handleInputChange} 
+                    onNext={handleNextStep}
+                    onPrevious={handlePreviousStep} 
+                />
+            )}
+            {step === 3 && (
+                <PaymentInfo 
+                    shippingInfo={shippingInfo} 
+                    handleInputChange={handleInputChange} 
+                    onNext={handleNextStep}
+                    onPrevious={handlePreviousStep} 
+                />
+            )}
+            {step === 4 && (
+                <OrderConfirmation 
+                    shippingInfo={shippingInfo} 
+                    subtotal={subtotal}
+                    shippingCost={shippingCost}
+                    total={total}
+                    onConfirm={handleCheckout}
+                    onPrevious={handlePreviousStep} 
+                />
             )}
         </div>
     );
