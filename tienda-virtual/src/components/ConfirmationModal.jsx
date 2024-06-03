@@ -12,9 +12,9 @@ const ConfirmationModal = ({ show, handleClose, product, quantity }) => {
         <h2>¡Producto añadido al carrito!</h2>
         <p>Has añadido {quantity} unidad(es) de <strong>{product.title}</strong> a tu carrito de compras.</p>
         <div className="modal-actions">
-          <button className="btn btn-secondary" onClick={handleClose}>Volver a la página de {product.title}</button>
+          <button className="btn btn-primary" onClick={handleClose}>Volver a la página de {product.title}</button>
           <button className="btn btn-primary" onClick={() => window.location.href = '/cart'}>Ver tu carrito de compras</button>
-          <button className="btn btn-success" onClick={() => window.location.href = '/'}>Ir a Inicio</button>
+          <button className="btn btn-primary" onClick={() => window.location.href = '/'}>Ir a Inicio</button>
         </div>
       </div>
     </div>

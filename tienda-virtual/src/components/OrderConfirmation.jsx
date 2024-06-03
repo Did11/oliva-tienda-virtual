@@ -9,7 +9,7 @@ const OrderConfirmation = ({ shippingInfo, subtotal, shippingCost, total, onConf
             <p><strong>Dirección:</strong> {shippingInfo.address}, {shippingInfo.city}, {shippingInfo.province}, {shippingInfo.country}, {shippingInfo.postalCode}</p>
             <p><strong>Subtotal:</strong> ${subtotal}</p>
             <p><strong>Costo de Envío:</strong> ${shippingCost}</p>
-            <p><strong>Total:</strong> ${total}</p>
+            <p><strong>T0tal:</strong> ${total}</p>
         </div>
         <button onClick={onConfirm} className="checkout-button">Confirmar Compra</button>
         <button onClick={onPrevious} className="checkout-button">Volver</button>

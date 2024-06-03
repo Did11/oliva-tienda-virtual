@@ -54,17 +54,24 @@ const CheckoutPage = () => {
     };
 
     const handleCheckout = () => {
+        const subtotal = parseFloat(calculateSubtotal());
+        const shippingCost = parseFloat(calculateShippingCost(subtotal));
+        const total = (subtotal + shippingCost).toFixed(2);
+    
         const orderData = {
             user: user.username,
             products: cart,
             shippingInfo,
             date: new Date().toISOString(),
+            subtotal,
+            shippingCost,
+            total
         };
-
+    
         const existingOrders = JSON.parse(localStorage.getItem('orders')) || [];
         existingOrders.push(orderData);
         localStorage.setItem('orders', JSON.stringify(existingOrders));
-        
+    
         clearCart();
         navigate('/order-confirmation');
     };
