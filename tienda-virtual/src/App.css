@@ -1,3 +1,4 @@
+/* Estilos generales de la aplicación */
 .App {
   text-align: center;
 }
@@ -13,6 +14,7 @@
   }
 }
 
+/* Estilos del encabezado */
 .App-header {
   background-color: #282c34;
   padding: 10px 20px;
@@ -30,6 +32,7 @@
   margin-right: 20px;
 }
 
+/* Estilos de la barra de navegación */
 .nav-list {
   list-style: none;
   display: flex;
@@ -51,6 +54,7 @@
   text-decoration: underline;
 }
 
+/* Estilos del buscador */
 .search-container {
   flex-grow: 1;
   display: flex;
@@ -100,6 +104,7 @@
   background-color: #21a1f1;
 }
 
+/* Estilos de las tarjetas de productos */
 .card-img-top {
   width: 100%;
   height: 500px;
@@ -129,6 +134,7 @@
   justify-content: center;
 }
 
+/* Estilos de la imagen en la página de detalles del producto */
 .img-product-detail {
   width: 100%;
   max-width: 400px;
@@ -137,6 +143,7 @@
   margin: 0 auto;
 }
 
+/* Estilos del control de cantidad */
 .quantity-control {
   display: flex;
   align-items: center;
@@ -149,12 +156,14 @@
   margin: 0 10px;
 }
 
+/* Estilos del carrito */
 .list-group-item input[type="number"] {
   width: 60px;
   text-align: center;
   margin-right: 10px;
 }
 
+/* Estilos de los botones */
 .btn {
   margin-top: 10px;
 }
@@ -181,4 +190,42 @@
   background-color: #dc3545;
   border-color: #dc3545;
   color: white;
+}
+
+/* Estilos del modal de confirmación */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  width: 300px;
+  text-align: center;
+  position: relative;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 20px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.modal-actions button {
+  margin: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
 }
