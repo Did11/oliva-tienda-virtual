@@ -11,6 +11,7 @@ import SearchPage from './pages/SearchPage.jsx';
 import CheckoutPage from './pages/CheckoutPage.jsx';
 import OrderConfirmationPage from './pages/OrderConfirmationPage.jsx';
 import MyPurchasesPage from './pages/MyPurchasesPage.jsx';
+import AccountPage from './pages/AccountPage.jsx';
 import { AuthProvider } from './context/AuthContext.jsx';
 import CartProvider from './context/CartContext.jsx';
 
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/order-confirmation" element={<OrderConfirmationPage />} />
           <Route path="/my-purchases" element={<MyPurchasesPage />} />
+          <Route path="/account" element={<AccountPage />} />
         </Routes>
       </Router>
     </CartProvider>

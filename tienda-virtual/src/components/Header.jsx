@@ -74,6 +74,7 @@ const Header = () => {
                     {user ? (
                         <>
                             <li><Link to="/my-purchases">Mis Compras</Link></li>
+                            <li><Link to="/account">Cuenta</Link></li>
                             <li><button onClick={logout}>Cerrar Sesión</button></li>
                         </>
                     ) : (
