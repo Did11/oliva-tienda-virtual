@@ -3,21 +3,20 @@ import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import '../App.css';
-import { AddToCartButton } from './ProductButton.jsx';
 import ConfirmationModal from './ConfirmationModal.jsx';
-import { CartContext } from '../context/CartContext.jsx'; // Importa el contexto del carrito
+import { CartContext } from '../context/CartContext.jsx';
 
 const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
   const [showModal, setShowModal] = useState(false);
-  const { cart } = useContext(CartContext); // Accede al contexto del carrito
+  const { cart, addToCart } = useContext(CartContext);
 
   useEffect(() => {
     axios.get(`https://fakestoreapi.com/products/${id}`)
       .then(response => setProduct(response.data))
-      .catch(error => console.error('Error fetching product details!', error));
+      .catch(error => console.error('Error al obtener los detalles del producto', error));
   }, [id]);
 
   const handleQuantityChange = (e) => {
@@ -34,15 +33,16 @@ const ProductDetail = () => {
     }
   };
 
-  const handleAddToCart = (product, quantity) => {
+  const handleAddToCart = () => {
+    addToCart(product, quantity);
     setShowModal(true);
+    setQuantity(1); // Reiniciar la cantidad a 1
   };
 
   const handleCloseModal = () => {
     setShowModal(false);
   };
 
-  // Encuentra la cantidad del producto en el carrito
   const productInCart = cart.find(item => item.id === product.id);
   const productQuantityInCart = productInCart ? productInCart.quantity : 0;
 
@@ -65,12 +65,12 @@ const ProductDetail = () => {
               className="quantity-input"
             />
             <button onClick={incrementQuantity} className="btn btn-secondary">+</button>
+            <button onClick={handleAddToCart} className="btn btn-success ml-2">Agregar al carrito</button>
           </div>
-          <AddToCartButton product={product} quantity={quantity} onAddToCart={handleAddToCart} />
           <p className="mt-3">
             {productQuantityInCart > 0
-              ? `Currently you have ${productQuantityInCart} unit(s) of this product in your cart.`
-              : "You don't have this product in your cart yet."}
+              ? `Actualmente tienes ${productQuantityInCart} unidad(es) de este producto en tu carrito.`
+              : "Todavía no tienes este producto en tu carrito."}
           </p>
         </div>
       </div>

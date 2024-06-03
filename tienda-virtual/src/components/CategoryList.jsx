@@ -32,7 +32,7 @@ const CategoryList = () => {
 
   return (
     <div className="container mt-4">
-      <h2 className="text-center">Categories</h2>
+      <h2 className="text-center">Categorías</h2>
       <div className="row justify-content-center">
         {categories.map((category, index) => (
           <div className="col-lg-3 col-md-4 col-sm-6 mb-4" key={index}>
@@ -40,7 +40,7 @@ const CategoryList = () => {
               <img src={categoryImages[category]} className="card-img-top" alt={category} />
               <div className="card-body">
                 <h5 className="card-title text-center">{category.charAt(0).toUpperCase() + category.slice(1)}</h5>
-                <Link to={`/category/${category}`} className="btn btn-primary btn-block">Shop Now</Link>
+                <Link to={`/category/${category}`} className="btn btn-primary btn-block">Seleccionar</Link>
               </div>
             </div>
           </div>

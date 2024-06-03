@@ -203,13 +203,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000;
 }
 
 .modal-content {
-  background: #fff;
+  background: #ff8800;
   padding: 20px;
   border-radius: 5px;
-  width: 300px;
+  width: 400px;
   text-align: center;
   position: relative;
 }
@@ -224,8 +225,19 @@
   cursor: pointer;
 }
 
+.modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .modal-actions button {
-  margin: 10px;
   padding: 10px 20px;
   cursor: pointer;
+  width: 100%;
+  font-size: 16px;
+}
+
+.quantity-control .btn-success {
+  margin-left: 10px; /* Añade un margen para separar el botón de los controles de cantidad */
 }

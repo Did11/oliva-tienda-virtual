@@ -12,7 +12,7 @@ const Header = () => {
   useEffect(() => {
     axios.get('https://fakestoreapi.com/products/categories')
       .then(response => setCategories(response.data))
-      .catch(error => console.error('Error fetching categories:', error));
+      .catch(error => console.error('Error al obtener las categorías:', error));
   }, []);
 
   const handleSearch = (e) => {
@@ -28,7 +28,7 @@ const Header = () => {
         <form onSubmit={handleSearch} className="search-form">
           <input
             type="text"
-            placeholder="Search products..."
+            placeholder="Buscar productos..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="search-input"
@@ -38,19 +38,19 @@ const Header = () => {
             onChange={(e) => setSelectedCategory(e.target.value)}
             className="category-select"
           >
-            <option value="">All</option>
+            <option value="">Todas</option>
             {categories.map((category) => (
               <option key={category} value={category}>
                 {category.charAt(0).toUpperCase() + category.slice(1)}
               </option>
             ))}
           </select>
-          <button type="submit" className="search-button">Search</button>
+          <button type="submit" className="search-button">Buscar</button>
         </form>
       </div>
       <nav>
         <ul className="nav-list">
-          <li><Link to="/cart">Cart</Link></li>
+          <li><Link to="/cart">Carrito</Link></li>
         </ul>
       </nav>
     </header>
