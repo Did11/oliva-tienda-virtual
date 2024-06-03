@@ -1,25 +1,42 @@
 // src/components/Header.jsx
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Header = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchTerm.trim()) {
+      navigate(`/search/${searchTerm}`);
+    }
+  };
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <div className="container-fluid">
-        <Link className="navbar-brand" to="/">Tienda Virtual</Link>
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ms-auto">
-            <li className="nav-item">
-              <Link className="nav-link" to="/cart">Cart</Link>
-            </li>
-          </ul>
-        </div>
+    <header className="App-header">
+      <h1>Tienda Virtual</h1>
+      <nav>
+        <ul className="nav-list">
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/cart">Cart</Link></li>
+          <li><Link to="/categories">Categories</Link></li>
+        </ul>
+      </nav>
+      <div className="search-container">
+        <form onSubmit={handleSearch}>
+          <input
+            type="text"
+            placeholder="Search products..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="search-input"
+          />
+          <button type="submit" className="search-button">Search</button>
+        </form>
       </div>
-    </nav>
+    </header>
   );
-};
+}
 
 export default Header;
