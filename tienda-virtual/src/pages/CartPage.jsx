@@ -1,8 +1,7 @@
-// src/pages/CartPage.jsx
-
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../context/CartContext.jsx';
+import './Cart.css';
 
 const CartPage = () => {
   const { cart, updateQuantity, removeFromCart } = useContext(CartContext);
@@ -23,7 +22,7 @@ const CartPage = () => {
   };
 
   return (
-    <div className="container mt-4">
+    <div className="container cart-container mt-4">
       <h2 className="text-center">Carrito de Compras</h2>
       {cart.length === 0 ? (
         <p className="text-center">Tu carrito está vacío</p>

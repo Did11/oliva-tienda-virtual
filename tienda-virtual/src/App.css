@@ -45,12 +45,19 @@
   display: inline;
 }
 
-.nav-list a {
+.nav-list a,
+.nav-list button {
   color: #fefffb;
   text-decoration: none;
+  background: none; /* Elimina el fondo del botón */
+  border: none; /* Elimina el borde del botón */
+  cursor: pointer; /* Asegura que el cursor cambie a pointer */
+  font-size: inherit; /* Asegura que el tamaño de la fuente sea consistente */
+  padding: 0; /* Asegura que el padding sea consistente */
 }
 
-.nav-list a:hover {
+.nav-list a:hover,
+.nav-list button:hover {
   text-decoration: underline;
 }
 
@@ -94,7 +101,7 @@
   background-color: #61dafb;
   border: none;
   border-radius: 4px;
-  color: white;
+  color: rgb(26, 18, 18);
   cursor: pointer;
   margin-left: 10px;
   height: 38px;
@@ -131,4 +138,59 @@
   background-color: #dc3545;
   border-color: #dc3545;
   color: white;
+}
+
+body {
+  background-color: #ffffff; 
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+/* Estilos para login */
+
+.login-container {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.login-container h2 {
+  margin-top: 0;
+}
+
+.login-container input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.login-container button {
+  padding: 10px 20px;
+  background-color: #28a745;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.login-container button:hover {
+  background-color: #218838;
 }

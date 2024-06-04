@@ -86,13 +86,13 @@ const ShippingInfo = ({ shippingInfo, handleInputChange, handleCountryChange, on
                     {errors.phone && <span>{errors.phone}</span>}
                 </div>
                 <div className="form-group">
-                    <label>Country:</label>
+                    <label>País:</label>
                     <select
                         name="country"
                         value={shippingInfo.country}
                         onChange={handleCountryChange}
                     >
-                        <option value="">Select Country</option>
+                        <option value="">Seleccione  país</option>
                         {countries.map((country) => (
                             <option key={country.code} value={country.code}>
                                 {country.name}
@@ -102,14 +102,14 @@ const ShippingInfo = ({ shippingInfo, handleInputChange, handleCountryChange, on
                     {errors.country && <span>{errors.country}</span>}
                 </div>
                 <div className="form-group">
-                    <label>Province:</label>
+                    <label>Provincia:</label>
                     <select
                         name="province"
                         value={shippingInfo.province}
                         onChange={handleInputChange}
                         disabled={!shippingInfo.country}
                     >
-                        <option value="">Select Province</option>
+                        <option value="">Seleccione provincia</option>
                         {shippingInfo.country && provinces[shippingInfo.country].map((province) => (
                             <option key={province} value={province}>
                                 {province}
@@ -119,7 +119,7 @@ const ShippingInfo = ({ shippingInfo, handleInputChange, handleCountryChange, on
                     {errors.province && <span>{errors.province}</span>}
                 </div>
                 <div className="form-group">
-                    <label>City:</label>
+                    <label>Ciudad:</label>
                     <input
                         type="text"
                         name="city"
@@ -129,7 +129,7 @@ const ShippingInfo = ({ shippingInfo, handleInputChange, handleCountryChange, on
                     {errors.city && <span>{errors.city}</span>}
                 </div>
                 <div className="form-group">
-                    <label>Address:</label>
+                    <label>Dirección:</label>
                     <input
                         type="text"
                         name="address"
@@ -139,7 +139,7 @@ const ShippingInfo = ({ shippingInfo, handleInputChange, handleCountryChange, on
                     {errors.address && <span>{errors.address}</span>}
                 </div>
                 <div className="form-group">
-                    <label>Postal Code:</label>
+                    <label>Código postal:</label>
                     <input
                         type="text"
                         name="postalCode"

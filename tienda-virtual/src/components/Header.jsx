@@ -78,7 +78,7 @@ const Header = () => {
                             <li><button onClick={logout}>Cerrar Sesión</button></li>
                         </>
                     ) : (
-                        <li><button onClick={() => setShowLogin(!showLogin)}>Cuenta</button></li>
+                        <li><button onClick={() => setShowLogin(!showLogin)}>Login</button></li>
                     )}
                 </ul>
             </nav>

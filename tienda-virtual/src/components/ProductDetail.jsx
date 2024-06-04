@@ -1,14 +1,13 @@
-// src/components/ProductDetail.jsx
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom'; // Importa useNavigate en lugar de useHistory
+import { useParams, useNavigate } from 'react-router-dom';
 import './ProductDetail.css';
 import ConfirmationModal from './ConfirmationModal';
 import { CartContext } from '../context/CartContext';
 
 const ProductDetail = () => {
     const { id } = useParams();
-    const navigate = useNavigate(); // Usa useNavigate en lugar de useHistory
+    const navigate = useNavigate();
     const [product, setProduct] = useState({});
     const [quantity, setQuantity] = useState(1);
     const [showModal, setShowModal] = useState(false);
@@ -42,7 +41,7 @@ const ProductDetail = () => {
 
     const handleCloseModal = () => {
         setShowModal(false);
-        setQuantity(1); // Reiniciar la cantidad después de cerrar el modal
+        setQuantity(1);
     };
 
     const handleBackToCategory = () => {
@@ -53,15 +52,15 @@ const ProductDetail = () => {
     const productQuantityInCart = productInCart ? productInCart.quantity : 0;
 
     return (
-        <div className="container mt-4">
-            <h2 className="text-center">{product.title}</h2>
-            <div className="row justify-content-center">
-                <div className="col-md-6">
-                    <img src={product.image} className="img-product-detail" alt={product.title} />
+        <div className="container product-detail-container mt-4">
+            <h2 className="product-title">{product.title}</h2>
+            <div className="product-detail">
+                <div className="product-image-container">
+                    <img src={product.image} className="product-detail-image" alt={product.title} />
                 </div>
-                <div className="col-md-6">
-                    <h3>{product.price}</h3>
-                    <p>{product.description}</p>
+                <div className="product-info">
+                    <h3 className="product-price">${product.price}</h3>
+                    <p className="product-description">{product.description}</p>
                     <div className="quantity-control">
                         <button onClick={decrementQuantity} className="btn btn-secondary">-</button>
                         <input
@@ -71,14 +70,16 @@ const ProductDetail = () => {
                             className="quantity-input"
                         />
                         <button onClick={incrementQuantity} className="btn btn-secondary">+</button>
-                        <button onClick={handleAddToCart} className="btn btn-success ml-2">Agregar al carrito</button>
                     </div>
-                    <p className="mt-3">
+                    <div className="action-buttons">
+                        <button onClick={handleAddToCart} className="btn btn-success">Agregar al carrito</button>
+                        <button onClick={handleBackToCategory} className="btn btn-primary">Volver a Categoría</button>
+                    </div>
+                    <p className="product-quantity-info">
                         {productQuantityInCart > 0
                             ? `Actualmente tienes ${productQuantityInCart} unidad(es) de este producto en tu carrito.`
                             : "Todavía no tienes este producto en tu carrito."}
                     </p>
-                    <button onClick={handleBackToCategory} className="btn btn-primary mt-3">Volver a Categoría</button>
                 </div>
             </div>
             <ConfirmationModal
