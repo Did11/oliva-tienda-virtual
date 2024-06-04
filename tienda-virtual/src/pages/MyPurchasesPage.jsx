@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import './MyPurchases.css'; // Asegúrate de tener el archivo CSS
+import '../styles/MyPurchases.css'; // Asegúrate de tener el archivo CSS
 
 const MyPurchasesPage = () => {
     const { user } = useAuth();

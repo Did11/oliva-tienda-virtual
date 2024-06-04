@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
-import './ProductDetail.css';
+import '../styles/ProductDetail.css';
 import ConfirmationModal from './ConfirmationModal';
 import { CartContext } from '../context/CartContext';
 

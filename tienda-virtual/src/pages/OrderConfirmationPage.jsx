@@ -1,5 +1,5 @@
 import React from 'react';
-import './OrderConfirmationPage.css';
+import '../styles/OrderConfirmationPage.css';
 
 const OrderConfirmationPage = () => {
     return (

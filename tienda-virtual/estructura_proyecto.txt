@@ -11,14 +11,12 @@
 │   └── robots.txt
 ├── README.md
 └── src
-    ├── App.css
     ├── App.jsx
     ├── App.test.js
     ├── components
     │   ├── Cart.jsx
     │   ├── CategoryList.jsx
     │   ├── Confirmation.jsx
-    │   ├── ConfirmationModal.css
     │   ├── ConfirmationModal.jsx
     │   ├── Header.jsx
     │   ├── OrderConfirmation.jsx
@@ -26,36 +24,39 @@
     │   ├── PersonalInfo.jsx
     │   ├── ProductButton.jsx
     │   ├── ProductCard.jsx
-    │   ├── ProductDetail.css
     │   ├── ProductDetail.jsx
-    │   ├── ProductList.css
     │   ├── ProductList.jsx
     │   └── ShippingInfo.jsx
     ├── context
     │   ├── AuthContext.jsx
     │   └── CartContext.jsx
-    ├── index.css
     ├── index.js
     ├── logo.svg
     ├── pages
     │   ├── AccountPage.jsx
-    │   ├── Cart.css
     │   ├── CartPage.jsx
-    │   ├── Category.css
     │   ├── CategoryPage.jsx
-    │   ├── CheckoutPage.css
     │   ├── CheckoutPage.jsx
     │   ├── HomePage.jsx
     │   ├── LoginPage.jsx
-    │   ├── MyPurchases.css
     │   ├── MyPurchasesPage.jsx
-    │   ├── OrderConfirmationPage.css
     │   ├── OrderConfirmationPage.jsx
     │   ├── ProductPage.jsx
     │   └── SearchPage.jsx
     ├── reportWebVitals.js
     ├── services
     │   └── api.js
-    └── setupTests.js
+    ├── setupTests.js
+    └── styles
+        ├── App.css
+        ├── Cart.css
+        ├── Category.css
+        ├── CheckoutPage.css
+        ├── ConfirmationModal.css
+        ├── index.css
+        ├── MyPurchases.css
+        ├── OrderConfirmationPage.css
+        ├── ProductDetail.css
+        └── ProductList.css
 
-6 directories, 52 files
+7 directories, 52 files

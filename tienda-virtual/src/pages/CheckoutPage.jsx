@@ -6,7 +6,7 @@ import ShippingInfo from '../components/ShippingInfo';
 import PersonalInfo from '../components/PersonalInfo';
 import PaymentInfo from '../components/PaymentInfo';
 import OrderConfirmation from '../components/OrderConfirmation';
-import './CheckoutPage.css';
+import '../styles/CheckoutPage.css';
 
 const CheckoutPage = () => {
     const { cart, clearCart } = useContext(CartContext);

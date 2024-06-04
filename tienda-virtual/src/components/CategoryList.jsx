@@ -2,7 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import '../App.css'; // Ajusta la ruta según tu estructura de carpetas
+import '../styles/App.css';
+
 
 const CategoryList = () => {
   const [categories, setCategories] = useState([]);

@@ -1,6 +1,6 @@
 // src/components/ConfirmationModal.jsx
 import React from 'react';
-import './ConfirmationModal.css';
+import '../styles/ConfirmationModal.css';
 
 const ConfirmationModal = ({ show, handleClose, product, quantity }) => {
   if (!show) return null;
