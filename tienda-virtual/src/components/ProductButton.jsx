@@ -21,7 +21,7 @@ export const AddToCartButton = ({ product, quantity, onAddToCart }) => {
 export const ViewDetailsButton = ({ productId }) => {
   return (
     <Link to={`/product/${productId}`} className="btn btn-primary">
-      View Details
+      Ver detalles
     </Link>
   );
 };

@@ -1,13 +1,14 @@
 // src/components/ProductDetail.jsx
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
-import '../App.css';
+import { useParams, useNavigate } from 'react-router-dom'; // Importa useNavigate en lugar de useHistory
+import './ProductDetail.css';
 import ConfirmationModal from './ConfirmationModal';
 import { CartContext } from '../context/CartContext';
 
 const ProductDetail = () => {
     const { id } = useParams();
+    const navigate = useNavigate(); // Usa useNavigate en lugar de useHistory
     const [product, setProduct] = useState({});
     const [quantity, setQuantity] = useState(1);
     const [showModal, setShowModal] = useState(false);
@@ -44,6 +45,10 @@ const ProductDetail = () => {
         setQuantity(1); // Reiniciar la cantidad después de cerrar el modal
     };
 
+    const handleBackToCategory = () => {
+        navigate(`/category/${product.category}`);
+    };
+
     const productInCart = cart.find(item => item.id === product.id);
     const productQuantityInCart = productInCart ? productInCart.quantity : 0;
 
@@ -73,6 +78,7 @@ const ProductDetail = () => {
                             ? `Actualmente tienes ${productQuantityInCart} unidad(es) de este producto en tu carrito.`
                             : "Todavía no tienes este producto en tu carrito."}
                     </p>
+                    <button onClick={handleBackToCategory} className="btn btn-primary mt-3">Volver a Categoría</button>
                 </div>
             </div>
             <ConfirmationModal

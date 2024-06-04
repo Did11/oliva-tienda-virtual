@@ -72,8 +72,8 @@
   border: 1px solid #ccc;
   border-radius: 4px 0 0 4px;
   width: 300px;
-  height: 38px; /* Asegura la misma altura */
-  box-sizing: border-box; /* Incluye padding y border en el tamaño total */
+  height: 38px;
+  box-sizing: border-box;
 }
 
 .category-select {
@@ -84,8 +84,8 @@
   border-radius: 0 4px 4px 0;
   background-color: rgb(255, 255, 255);
   cursor: pointer;
-  height: 38px; /* Asegura la misma altura */
-  box-sizing: border-box; /* Incluye padding y border en el tamaño total */
+  height: 38px;
+  box-sizing: border-box;
 }
 
 .search-button {
@@ -97,70 +97,11 @@
   color: white;
   cursor: pointer;
   margin-left: 10px;
-  height: 38px; /* Asegura la misma altura */
+  height: 38px;
 }
 
 .search-button:hover {
   background-color: #21a1f1;
-}
-
-/* Estilos de las tarjetas de productos */
-.card-img-top {
-  width: 100%;
-  height: 500px;
-  object-fit: cover;
-  object-position: top;
-}
-
-.card {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 10px;
-}
-
-.card-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 100%;
-  text-align: center;
-}
-
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-/* Estilos de la imagen en la página de detalles del producto */
-.img-product-detail {
-  width: 100%;
-  max-width: 400px;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-}
-
-/* Estilos del control de cantidad */
-.quantity-control {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.quantity-input {
-  width: 60px;
-  text-align: center;
-  margin: 0 10px;
-}
-
-/* Estilos del carrito */
-.list-group-item input[type="number"] {
-  width: 60px;
-  text-align: center;
-  margin-right: 10px;
 }
 
 /* Estilos de los botones */
@@ -191,102 +132,3 @@
   border-color: #dc3545;
   color: white;
 }
-
-/* Estilos del modal de confirmación */
-
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  background: #c2d41b;
-  padding: 20px;
-  border-radius: 5px;
-  width: 400px;
-  text-align: center;
-  position: relative;
-}
-
-.modal-close {
-  background: none;
-  border: none;
-  font-size: 20px;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-}
-
-.modal-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.modal-actions button {
-  padding: 10px 20px;
-  cursor: pointer;
-  width: 100%;
-  font-size: 16px;
-}
-
-.quantity-control .btn-success {
-  margin-left: 10px; /* Añade un margen para separar el botón de los controles de cantidad */
-}
-
-
-/*Estilos para cart */
-
-.cart-item-info {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex: 1;
-}
-
-.cart-item-image {
-  width: 60px;
-  height: 60px;
-  object-fit: cover;
-  border-radius: 5px;
-}
-
-.cart-item-details {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
-.cart-item-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.cart-item-actions input[type="number"] {
-  width: 60px;
-  text-align: center;
-}
-
-.cart-item-actions p {
-  margin: 0;
-  min-width: 100px;
-  text-align: right;
-}
-
-.cart-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-}
-

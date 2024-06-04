@@ -16,7 +16,7 @@ const CategoryPage = () => {
 
   return (
     <div>
-      <h2>Categoria: {name}</h2>
+      <h2>Categoría: {name}</h2>
       <ProductList products={products} />
     </div>
   );
