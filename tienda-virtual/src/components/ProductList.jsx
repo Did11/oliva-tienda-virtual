@@ -1,28 +1,19 @@
 // src/components/ProductList.jsx
 import React from 'react';
-import { ViewDetailsButton } from './ProductButton.jsx';
+import { Link } from 'react-router-dom';
+import './ProductList.css'; // Asegúrate de que esta línea esté presente
 
-const ProductList = ({ products }) => {
-  return (
-    <div className="container">
-      <div className="row">
-        {products.map((product) => (
-          <div key={product.id} className="col-md-4">
-            <div className="card mb-4">
-              <img src={product.image} className="card-img-top" alt={product.title} />
-              <div className="card-body">
-                <h5 className="card-title">{product.title}</h5>
-                <p className="card-text">${product.price}</p>
-                <div className="d-flex justify-content-between">
-                  <ViewDetailsButton productId={product.id} />
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
+const ProductList = ({ products }) => (
+  <div className="product-list-container">
+    {products.map(product => (
+      <div key={product.id} className="product-item">
+        <img src={product.image} alt={product.title} />
+        <h3 className="product-item-title">{product.title}</h3>
+        <p className="product-item-price">${product.price}</p>
+        <Link to={`/product/${product.id}`} className="product-item-button">Ver detalles</Link>
       </div>
-    </div>
-  );
-};
+    ))}
+  </div>
+);
 
 export default ProductList;

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ProductList from '../components/ProductList.jsx';
 import { getProductsByCategory } from '../services/api';
+import './Category.css'; // Importa el nuevo archivo CSS
 
 const CategoryPage = () => {
   const { name } = useParams();
