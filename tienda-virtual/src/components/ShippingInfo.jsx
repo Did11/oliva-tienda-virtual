@@ -2,26 +2,32 @@ import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 
 const countries = [
-    { code: 'US', name: 'United States' },
+    { code: 'AR', name: 'Argentina' },
+    { code: 'US', name: 'Estados Unidos' },
     { code: 'CA', name: 'Canada' },
     { code: 'MX', name: 'Mexico' },
-    // Agrega más países según sea necesario
+   
 ];
 
+
 const provinces = {
+    AR: [
+        'Buenos Aires', 'Catamarca', 'Chaco', 'Chubut', 'Córdoba', 'Corrientes', 'Entre Ríos', 'Formosa', 'Jujuy', 'La Pampa', 'La Rioja', 'Mendoza', 'Misiones', 'Neuquén', 'Río Negro', 'Salta', 'San Juan', 'San Luis', 'Santa Cruz', 'Santa Fe', 'Santiago del Estero', 'Tierra del Fuego', 'Tucumán'
+    ],
     US: [
-        'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia',
-        // Agrega más estados según sea necesario
+        'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii', 'Illinois', 'Indiana', 'Kentucky', 'Louisiana', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Missouri', 'Nevada', 'New Jersey', 'New York', 'North Carolina', 'Ohio', 'Oregon', 'Pennsylvania', 'Texas', 'Virginia', 'Washington',
     ],
     CA: [
         'Alberta', 'British Columbia', 'Manitoba', 'New Brunswick', 'Newfoundland and Labrador', 'Nova Scotia', 'Ontario', 'Prince Edward Island', 'Quebec', 'Saskatchewan',
-        // Agrega más provincias según sea necesario
+       
     ],
     MX: [
         'Aguascalientes', 'Baja California', 'Baja California Sur', 'Campeche', 'Chiapas', 'Chihuahua', 'Coahuila', 'Colima', 'Durango', 'Guanajuato', 'Guerrero', 'Hidalgo', 'Jalisco', 'Mexico City',
-        // Agrega más estados según sea necesario
+        
     ],
+
 };
+
 
 const ShippingInfo = ({ shippingInfo, handleInputChange, handleCountryChange, onNext }) => {
     const { user } = useAuth();

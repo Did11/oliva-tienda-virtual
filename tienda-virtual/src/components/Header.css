@@ -5,8 +5,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: calc(10px + 2vmin);
+    font-size: 20px;
     color: white;
+    font-family: 'Roboto', Arial, sans-serif; 
   }
   
   .header-logo {
@@ -39,7 +40,7 @@
     background: none; /* Elimina el fondo del botón */
     border: none; /* Elimina el borde del botón */
     cursor: pointer; /* Asegura que el cursor cambie a pointer */
-    font-size: inherit; /* Asegura que el tamaño de la fuente sea consistente */
+    /*font-size: inherit;  Asegura que el tamaño de la fuente sea consistente */
     padding: 0; /* Asegura que el padding sea consistente */
   }
   
@@ -96,5 +97,12 @@
   
   .search-button:hover {
     background-color: #21a1f1;
+  }
+  
+
+  .roboto-regular {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
   }
   
