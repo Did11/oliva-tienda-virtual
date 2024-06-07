@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import '../styles/MyPurchases.css'; // Asegúrate de tener el archivo CSS
+import '../styles/MyPurchases.css'; 
 
 const MyPurchasesPage = () => {
     const { user } = useAuth();
@@ -22,15 +22,14 @@ const MyPurchasesPage = () => {
 
     return (
         <div className="my-purchases">
-            <h1>Mis Compras</h1>
             {orders.length === 0 ? (
                 <p>No has realizado ninguna compra.</p>
             ) : (
                 orders.map((order, index) => (
                     <div key={index} className="purchase">
-                        <h2>Compra realizada el {new Date(order.date).toLocaleDateString()}</h2>
-                        <p><strong>Envío a:</strong> {order.shippingInfo.address}, {order.shippingInfo.city}, {order.shippingInfo.province}, {order.shippingInfo.country}</p>
-                        <h3>Productos:</h3>
+                        <h3>Compra realizada el {new Date(order.date).toLocaleDateString()}</h3>
+                        <p><strong>Envío a: </strong> {order.shippingInfo.address}, {order.shippingInfo.city}, {order.shippingInfo.province}, {order.shippingInfo.country}</p>
+                        <h3>Productos: </h3>
                         <ul>
                             {order.products.map((product) => (
                                 <li key={product.id} className="product">
@@ -41,8 +40,8 @@ const MyPurchasesPage = () => {
                                 </li>
                             ))}
                         </ul>
-                        <p><strong>Total:</strong> ${calculateTotal(order.products, order.shippingCost)}</p>
-                        <p><strong>Estado:</strong> En camino</p>
+                        <p><strong>Total: </strong> ${calculateTotal(order.products, order.shippingCost)}</p>
+                        <p><strong>Estado: </strong> En camino</p>
                     </div>
                 ))
             )}

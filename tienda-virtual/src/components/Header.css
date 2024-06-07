@@ -1,0 +1,100 @@
+/* Estilos del encabezado */
+.header {
+    background-color: #ffe600;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  }
+  
+  .header-logo {
+    text-decoration: none;
+    margin-right: 20px;
+  }
+  
+  .logo {
+    height: auto;  
+    width: auto;   
+  }
+  
+  /* Estilos de la barra de navegación */
+  .nav-list {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .nav-list li {
+    display: inline;
+  }
+  
+  .nav-list a,
+  .nav-list button {
+    color: black;
+    text-decoration: none;
+    background: none; /* Elimina el fondo del botón */
+    border: none; /* Elimina el borde del botón */
+    cursor: pointer; /* Asegura que el cursor cambie a pointer */
+    font-size: inherit; /* Asegura que el tamaño de la fuente sea consistente */
+    padding: 0; /* Asegura que el padding sea consistente */
+  }
+  
+  .nav-list a:hover,
+  .nav-list button:hover {
+    text-decoration: underline;
+  }
+  
+  /* Estilos del buscador */
+  .search-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .search-form {
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-input {
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+    width: 300px;
+    height: 38px;
+    box-sizing: border-box;
+  }
+  
+  .category-select {
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-left: none;
+    border-radius: 0 4px 4px 0;
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+    height: 38px;
+    box-sizing: border-box;
+  }
+  
+  .search-button {
+    padding: 5px 10px;
+    font-size: 16px;
+    background-color: #bcbdca;
+    border: none;
+    border-radius: 4px;
+    color: rgb(26, 18, 18);
+    cursor: pointer;
+    margin-left: 10px;
+    height: 38px;
+  }
+  
+  .search-button:hover {
+    background-color: #21a1f1;
+  }
+  

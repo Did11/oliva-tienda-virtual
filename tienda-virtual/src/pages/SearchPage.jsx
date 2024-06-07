@@ -43,7 +43,7 @@ const SearchPage = () => {
 
   return (
     <div className="container mt-4">
-      <h2>Search Results</h2>
+      <h2>Resultados de la búsqueda</h2>
       <div className="row">
         {products.length > 0 ? (
           products.map(product => (
@@ -52,7 +52,7 @@ const SearchPage = () => {
             </div>
           ))
         ) : (
-          <p>No products found</p>
+          <p>Producto no encontrado. </p>
         )}
       </div>
     </div>

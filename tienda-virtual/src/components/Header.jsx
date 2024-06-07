@@ -1,9 +1,8 @@
-// src/components/Header.jsx
-
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
+import './Header.css';  // Importa el nuevo archivo de estilos
 
 const Header = () => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -42,8 +41,10 @@ const Header = () => {
     };
 
     return (
-        <header className="App-header">
-            <Link to="/" className="header-logo">Tienda Virtual</Link>
+        <header className="header">
+            <Link to="/" className="header-logo">
+                <img src="/logo.png" alt="Tienda Virtual" className="logo" />
+            </Link>
             <div className="search-container">
                 <form onSubmit={handleSearch} className="search-form">
                     <input
@@ -83,7 +84,7 @@ const Header = () => {
                 </ul>
             </nav>
             {showLogin && (
-                <div>
+                <div className="login-container">
                     <h2>Iniciar Sesión</h2>
                     <input
                         type="text"
