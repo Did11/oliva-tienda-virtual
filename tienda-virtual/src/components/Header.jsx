@@ -98,7 +98,7 @@ const Header = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                    <button onClick={handleLogin}>Iniciar Sesión</button>
+                    <button onClick={handleLogin}>Ingresar</button>
                 </div>
             )}
         </header>
