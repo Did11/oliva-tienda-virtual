@@ -1,7 +1,6 @@
-// src/components/Cart.jsx
 import React, { useContext } from 'react';
 import { CartContext } from '../context/CartContext.jsx';
-import '../styles/Cart.css'; // Importa el archivo CSS específico
+import '../styles/Cart.css'; 
 
 const Cart = () => {
   const { cart, removeFromCart } = useContext(CartContext);

@@ -1,7 +1,6 @@
-// src/components/ProductList.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/ProductList.css'; // Asegúrate de que esta línea esté presente
+import '../styles/ProductList.css'; 
 
 const ProductList = ({ products }) => (
   <div className="product-list-container">

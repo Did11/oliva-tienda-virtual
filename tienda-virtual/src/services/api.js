@@ -1,5 +1,3 @@
-// src/services/api.js
-
 // Obtener todas las categorías
 export const getCategories = async () => {
     const response = await fetch('https://fakestoreapi.com/products/categories');

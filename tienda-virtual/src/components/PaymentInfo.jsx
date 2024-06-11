@@ -5,7 +5,7 @@ const PaymentInfo = ({ shippingInfo, handleInputChange, onNext, onPrevious }) =>
 
     const handleExpirationDateChange = (e) => {
         let { value } = e.target;
-        value = value.replace(/\D/g, ''); // Eliminar todo lo que no sea un dígito
+        value = value.replace(/\D/g, ''); 
         if (value.length <= 2) {
             value = value.replace(/(\d{0,2})/, '$1');
         } else if (value.length <= 4) {
