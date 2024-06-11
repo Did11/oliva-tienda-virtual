@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
-import './Header.css';  // Importa el nuevo archivo de estilos
+import '../styles/Header.css';  // Importa el nuevo archivo de estilos
 
 const Header = () => {
     const [searchTerm, setSearchTerm] = useState('');
